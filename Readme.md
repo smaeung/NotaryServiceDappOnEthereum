@@ -6,4 +6,4 @@ by Sungho Maeung (smaeung@gmail.com)
 - OpenZeppelin version is v2.1.2
 - ERC-721 Token Name is Notary Token.
 - ERC-721 Symbol is UDC
-- Token Address on the Rinkeby Network (https://rinkeby.etherscan.io/tx/0x88ecea271cdc9b4d95d3b932f8f4d1acc6f6469fc6f4c0781cf3231d6b5f5be3)
+- Token Address on the Rinkeby Network (https://rinkeby.etherscan.io/address/0xf4b063a05563cdff5c5c85420e874b82c88f2973)
