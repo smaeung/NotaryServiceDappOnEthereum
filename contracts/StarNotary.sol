@@ -13,13 +13,8 @@ contract StarNotary is ERC721 {
 
     // Implement Task 1 Add a name and symbol properties
     // name: Is a short name to your token
-    function name() public pure returns (string memory) {
-        return "Notary Token";
-    }
-    // symbol: Is a short string like 'USD' -> 'American Dollar'
-    function symbol() public pure returns (string memory) {
-        return "UDC";
-    }
+    string public constant name = "Notary Token";
+    string public constant symbol = "UDC";
 
     // mapping the Star with the Owner Address
     mapping(uint256 => Star) public tokenIdToStarInfo;
@@ -76,24 +71,22 @@ contract StarNotary is ERC721 {
         require( owner1 == msg.sender || owner2 == msg.sender, 'the give tokens is not owned by owner');
 
         //2. You don't have to check for the price of the token (star)
-        bool isOwner1 = (owner1 == msg.sender);
         //3. Get the owner of the two tokens (ownerOf(_tokenId1), ownerOf(_tokenId1)
-
-        //4. Use _transferFrom function to exchange the tokens.
-        if(isOwner1){
-            _transferFrom(msg.sender, owner2, _tokenId1); 
-            _transferFrom(owner2, msg.sender, _tokenId2);
+        //4. Use transferFrom function to exchange the tokens.
+        if(owner1 == msg.sender){
+            transferFrom(msg.sender, owner2, _tokenId1); 
+            transferFrom(owner2, msg.sender, _tokenId2);
         } else{
-            _transferFrom(owner2, msg.sender, _tokenId1);
-            _transferFrom(msg.sender, owner2, _tokenId2); 
+            transferFrom(owner2, msg.sender, _tokenId1);
+            transferFrom(msg.sender, owner2, _tokenId2); 
         }
     }
 
     // Implement Task 1 Transfer Stars
     function transferStar(address _to1, uint256 _tokenId) public {
         //1. Check if the sender is the ownerOf(_tokenId)
-        require(ownerOf(_tokenId) == msg.sender, 'The given tokenId is not the token owner');
-        require(ownerOf(_tokenId) != _to1, 'The given tokenId should not be owner by the giveen address _to1');
+        require(ownerOf(_tokenId) == msg.sender, 'The given tokenId is not owned by the caller');
+        require(ownerOf(_tokenId) != _to1, 'The owner must transfer to a different address and not to his/her own address');
         //2. Use the transferFrom(from, to, tokenId); function to transfer the 
         transferFrom(msg.sender, _to1, _tokenId);
     }
